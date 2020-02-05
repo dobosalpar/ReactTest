@@ -22,15 +22,15 @@ class App extends Component {
     return (
       <div>
          <button onClick={this.OnClickButton}>
-        Increase count
-      </button>
+          Increase count
+        </button>
 
-      {this.state.count}
-   <CountPresenter></CountPresenter>
-      <div>
-        <h1>Just test</h1>
-        <h2>It is {this.test.date.toLocaleTimeString()}.</h2>
-      </div>
+        {this.state.count}
+        <CountPresenter />
+        <div>
+          <h1>Just test</h1>
+          <h2>It is {this.test.date.toLocaleTimeString()}.</h2>
+        </div>
       </div>
     );
   }
