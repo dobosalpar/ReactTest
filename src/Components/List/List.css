@@ -1,0 +1,16 @@
+.list {
+	width: 100%;
+}
+
+.list-element {
+	border-top: 1px solid gray;
+}
+
+.list-element__title {
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+
+.list-element__content {
+	font-size: 0.9rem;
+}
