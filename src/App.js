@@ -4,21 +4,24 @@ import CountPresenter from './Components/CountPresenter/CountPresenter';
 class App extends Component {
   constructor() {
     super();
+    this.increaseCount = this.increaseCount.bind(this);
     this.state = {
       count: 0,
     }
   }
-
   increaseCount() {
-    this.state.count = this.state.count + 1;
+    this.setState({
+      count: this.state.count + 1
+    })
   }
-
   render() {
     return (
-      <button>
+      <>
+      <button onClick={this.increaseCount}>
         Increase count
       </button>
-      <CountPresenter />
+      <CountPresenter count={this.state.count}/>
+      </>
     );
   }
 }
