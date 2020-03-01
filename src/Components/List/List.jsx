@@ -5,21 +5,20 @@ class List extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isLoading: false,
 			list: [],
 		}
 	}
 
-	componentDidMount() {
-		this.setState({
-			isLoading: true,
-		})
+	componentDidUpdate(props) {
+		if (props.isLoading) {
+			return
+		}
 		fetch('https://jsonplaceholder.typicode.com/posts')
   			.then(response => response.json())
 			.then(json => {
+				this.props.downloadComplete()
 				this.setState({
-					isLoading: false,
-					list: json,
+					list: json
 				})
 			});
 	}
@@ -27,7 +26,7 @@ class List extends Component {
 	render() {
 		return (
 			<div className="list">
-				<div>Loading...</div>
+				{this.props.isLoading && <div>Loading...</div>}
 				{this.state.list.map(element => (
 					<div className="list-element">
 						<div className="list-element__title">{element.title}</div>
