@@ -28,7 +28,7 @@ class List extends Component {
 			<div className="list">
 				{this.props.isLoading && <div>Loading...</div>}
 				{this.state.list.map(element => (
-					<div className="list-element">
+					<div key={element.id} className="list-element">
 						<div className="list-element__title">{element.title}</div>
 						<div className="list-element__content">{element.body}</div>
 					</div>
