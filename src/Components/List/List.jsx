@@ -6,6 +6,7 @@ class List extends Component {
 		super();
 		this.state = {
 			isLoading: false,
+			isOpened: false,
 			list: [],
 		}
 	}
@@ -13,6 +14,7 @@ class List extends Component {
 	componentDidMount() {
 		this.setState({
 			isLoading: true,
+			isOpened: false,
 		})
 		fetch('https://jsonplaceholder.typicode.com/posts')
   			.then(response => response.json())
@@ -20,6 +22,7 @@ class List extends Component {
 				this.setState({
 					isLoading: false,
 					list: json,
+					isOpened: true,
 				})
 			});
 	}
@@ -27,7 +30,7 @@ class List extends Component {
 	render() {
 		return (
 			<div className="list">
-				<div>Loading...</div>
+				<div class={this.state.isOpened ? 'hidden' : ''}>Loading...</div>
 				{this.state.list.map(element => (
 					<div className="list-element">
 						<div className="list-element__title">{element.title}</div>

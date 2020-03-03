@@ -4,6 +4,7 @@
 
 .list-element {
 	border-top: 1px solid gray;
+	padding: 1%;
 }
 
 .list-element__title {
@@ -13,4 +14,37 @@
 
 .list-element__content {
 	font-size: 0.9rem;
+}
+
+.hidden{
+	display: none;
+}
+
+.active-button{
+	background-color: deepskyblue;
+	border: 0;
+	padding: 10px 30px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.disabled-button{
+	cursor: not-allowed;
+	pointer-events: none;
+	background-color: #ccc;
+	color: darkslategray;
+	font-size: 14px;
+	border: 0;
+	padding: 10px 30px;
+	font-weight: 700;
+}
+
+.text-center{
+	text-align: center;
+	margin: 5% 0;
+}
+
+.simple-no-list-text{
+	text-align: center;
 }
