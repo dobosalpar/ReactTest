@@ -29,6 +29,7 @@ class List extends Component {
 
 	render() {
 		return (
+			<>
 			<div className="list">
 				<div class={this.state.isOpened ? 'hidden' : ''}>Loading...</div>
 				{this.state.list.map(element => (
@@ -38,6 +39,7 @@ class List extends Component {
 					</div>
 				))}
 			</div>
+			</>
 		);
 	}
 };
