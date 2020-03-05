@@ -1,0 +1,18 @@
+.navigation {
+	background-color: gray;
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 2% 1rem 2%;
+}
+
+.navigation__title {
+	font-size: 2rem;
+}
+
+.navigation__menu {
+	display: flex;
+}
+
+.navigation__menu--element {
+	margin-left: 1rem;
+}
