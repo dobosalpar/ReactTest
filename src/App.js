@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import List from './Components/List/List';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Navigation from './Components/Navigation/Navigation';
+import RandomList from './Screens/RandomList/RandomList';
+import AgeGuesser from './Screens/AgeGuesser/AgeGuesser';
+import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.downloadList = this.downloadList.bind(this);
-  }
-
-  downloadList() {
-    
-  }
-
   render() {
     return (
-      <>
-        <button onClick={this.downloadList}>
-          Download list
-        </button>
-        <List />
-      </>
+      <BrowserRouter>
+        <Navigation />
+        <RandomList />
+        <AgeGuesser />
+      </BrowserRouter>
     );
   }
 }
