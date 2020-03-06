@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './Components/Navigation/Navigation';
 import RandomList from './Screens/RandomList/RandomList';
 import AgeGuesser from './Screens/AgeGuesser/AgeGuesser';
@@ -10,8 +10,14 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Navigation />
-        <RandomList />
-        <AgeGuesser />
+          <Switch>
+            <Route path="/age-guesser">
+              <AgeGuesser />
+            </Route>
+            <Route path="/">
+              <RandomList />
+            </Route>
+          </Switch>
       </BrowserRouter>
     );
   }
