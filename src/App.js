@@ -5,10 +5,10 @@ class App extends Component {
   constructor() {
     super();
     this.downloadList = this.downloadList.bind(this);
-    this.downloadCompleted = this.downloadCompleted.bind(this)
    
     this.state = {
       isLoading: false,
+      list: []
     };
   }
 
@@ -16,12 +16,14 @@ class App extends Component {
     this.setState({
       isLoading: true,
     });
-  }
-
-  downloadCompleted() {
-    this.setState({
-      isLoading: false,
-    });
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+            isLoading: false,
+            list: json,
+        })
+      });
   }
 
   render() {
@@ -30,7 +32,7 @@ class App extends Component {
         <button onClick={this.downloadList} disabled={this.state.isLoading}>
           Download list
         </button>
-        <List isLoading={this.state.isLoading} downloadComplete={this.downloadCompleted}/>
+        <List isLoading={this.state.isLoading} list={this.state.list}/>
       </>
     );
   }
