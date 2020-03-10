@@ -9,10 +9,14 @@ const Navigation = () => (
 		</div>
 		<div className="navigation__menu">
 			<div className="navigation__menu--element">
-				Random List
+				<Link to="/">
+					Random List
+				</Link>
 			</div>
 			<div className="navigation__menu--element">
-				Age Guesser
+				<Link to="/age-guesser">
+					Age Guesser
+				</Link>
 			</div>
 		</div>
 	</div>
