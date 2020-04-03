@@ -4,17 +4,32 @@ class AgeGuesser extends Component {
   constructor() {
     super();
     this.state = {
-      name: ''
+      name: '',
+      age: null,
+      isLoading: false,
     };
     this.guessAge = this.guessAge.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+  }
+
+  handleNameChange(text) {
+    this.setState({
+      name: text,
+    })
   }
 
   guessAge() {
-    const name = 'Alpar';
+    const name = this.state.name;
+    this.setState({
+      isLoading: true,
+    });
     fetch(`https://api.agify.io?name=${name}`)
       .then(response => response.json())
       .then(json => {
-        console.log(json);
+        this.setState({
+          age: json.age,
+          isLoading: false,
+        });
       });
   }
 
@@ -22,7 +37,9 @@ class AgeGuesser extends Component {
     return (
       <>
         <h1>Age Guesser</h1>
-        <button onClick={this.guessAge}>Guess Age</button>
+        <input type="text" value={this.state.name} onChange={e => this.handleNameChange(e.target.value)} />
+        <button onClick={this.guessAge} disabled={this.state.isLoading || !this.state.name}>Guess Age</button>
+        <div>{this.state.age}</div>
       </>
     );
   }
