@@ -10,6 +10,7 @@ class RandomList extends Component {
       list: [],
     };
     this.downloadList = this.downloadList.bind(this);
+    this.onListItemClick = this.onListItemClick.bind(this);
   }
 
   downloadList() {
@@ -26,6 +27,13 @@ class RandomList extends Component {
 			});
   }
 
+  onListItemClick(post) {
+    this.props.history.push({
+      pathname: "post/" + post.id,
+      state: { post: post }
+    })
+  }
+
   render() {
     const { isLoading, list } = this.state;
     return (
@@ -35,7 +43,7 @@ class RandomList extends Component {
           Download list
         </button>
         {/* The this values were part of the List component's state now they are passed down as props */}
-        <List isLoading={isLoading} list={list} />
+        <List isLoading={isLoading} list={list} onClick={this.onListItemClick} />
       </>
     );
   }

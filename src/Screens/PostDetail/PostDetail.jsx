@@ -6,6 +6,27 @@ class PostDetail extends Component {
     this.state = {
       post: {},
     };
+    this.downloadPost = this.downloadPost.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.location.state !== undefined) {
+      this.setState({
+        post: this.props.location.state.post,
+      })
+    } else {
+      this.downloadPost(this.props.location.pathname.substring(this.props.location.pathname.lastIndexOf('/') + 1))
+    }
+  }
+
+  downloadPost(id) {
+		fetch('https://jsonplaceholder.typicode.com/posts/' + id)
+  			.then(response => response.json())
+			.then(json => {
+				this.setState({
+					post: json
+				})
+			});
   }
 
   render() {

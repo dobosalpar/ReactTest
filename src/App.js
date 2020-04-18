@@ -16,7 +16,7 @@ class App extends Component {
         <Navigation />
         <Route exact path="/" component={RandomList} />
         <Route path="/age-guesser" component={AgeGuesser} />
-
+        <Route path="/post/:id" component={PostDetail} />
       </BrowserRouter>
     );
   }
