@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class AgeGuesser extends Component {
   constructor() {
     super();
+    // useState
     this.state = {
       name: '',
       age: null,
@@ -12,12 +13,14 @@ class AgeGuesser extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
   }
 
+  // useCallback
   handleNameChange(text) {
     this.setState({
       name: text,
     })
   }
 
+  // useCallback
   guessAge() {
     const name = this.state.name;
     this.setState({

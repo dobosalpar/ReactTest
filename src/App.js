@@ -9,6 +9,7 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
+    // useState
     this.state = {
       isLoading: false,
       list: [],
@@ -17,6 +18,7 @@ class App extends Component {
     this.downloadListById = this.downloadListById.bind(this);
   }
 
+  // useCallback
   downloadList() {
     this.setState({
 			isLoading: true,
@@ -31,6 +33,7 @@ class App extends Component {
 		});
   }
 
+  // useCallback
   downloadListById(id) {
     this.setState({
 			isLoading: true,

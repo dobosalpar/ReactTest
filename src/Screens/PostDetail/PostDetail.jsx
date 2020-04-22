@@ -4,11 +4,13 @@ import { withRouter } from 'react-router-dom';
 class PostDetail extends Component {
   constructor() {
     super();
+    // useState
     this.state = {
       post: {},
     };
   }
 
+  // useEffect
   setCurrentPost() {
     const postId = this.props.match.params.id;
     if (this.state.post.id === parseInt(postId) || this.props.isLoading) {
@@ -25,10 +27,12 @@ class PostDetail extends Component {
     downloadListById(postId);
   }
 
+  // useEffect
   componentDidMount() {
     this.setCurrentPost();
   }
 
+  // useEffect
   componentDidUpdate() {
     this.setCurrentPost();
   }
