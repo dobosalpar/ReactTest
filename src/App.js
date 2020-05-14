@@ -1,10 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, createContext } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Navigation from './Components/Navigation/Navigation';
 import RandomList from './Screens/RandomList/RandomList';
 import AgeGuesser from './Screens/AgeGuesser/AgeGuesser';
 import PostDetail from './Screens/PostDetail/PostDetail';
+import Context from './Screens/Context/Context';
 import './App.css';
+
+export const TodoContext = createContext();
 
 const App = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -32,12 +35,17 @@ const App = () => {
 		});
   }, [list]);
 
+  const [todoList, setTodoList] = useState([]);
+
   return (
     <BrowserRouter>
-      <Navigation />
-      <Route exact path="/" render={() => <RandomList isLoading={isLoading} list={list} downloadList={downloadList} />} />
-      <Route path="/age-guesser" component={AgeGuesser} />
-      <Route path="/post/:id" render={() => <PostDetail isLoading={isLoading} list={list} downloadListById={downloadListById} />} />
+      {/* Add Context provider here */}
+        <Navigation />
+        <Route exact path="/" render={() => <RandomList isLoading={isLoading} list={list} downloadList={downloadList} />} />
+        <Route path="/age-guesser" component={AgeGuesser} />
+        <Route path="/post/:id" render={() => <PostDetail isLoading={isLoading} list={list} downloadListById={downloadListById} />} />
+        <Route path="/context" component={Context} />
+
     </BrowserRouter>
   );
 }
