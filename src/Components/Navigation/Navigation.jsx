@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import context here
+import { TodoContext } from '../../App';
 import './Navigation.css';
 
 const Navigation = () => {
-	// Get the needed values from the context here
+	const { todoList } = useContext(TodoContext);
+
 	return (
 		<div className="navigation">
 			<div className="navigation__title">
 				React test App
 			</div>
 			<div className="navigation__info">
-				{`You have /* add number of things here */ things to do`}
+				{`You have ${todoList.length} things to do`}
 			</div>
 			<div className="navigation__menu">
 				<Link to="/" className="navigation__menu--element">
