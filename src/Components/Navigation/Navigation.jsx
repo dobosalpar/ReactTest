@@ -8,12 +8,12 @@ const Navigation = () => (
 			React test App
 		</div>
 		<div className="navigation__menu">
-			<div className="navigation__menu--element">
+			<Link to="/" className="navigation__menu--element">
 				Random List
-			</div>
-			<div className="navigation__menu--element">
+			</Link>
+			<Link to="/age-guesser" className="navigation__menu--element">
 				Age Guesser
-			</div>
+			</Link>
 		</div>
 	</div>
 );

@@ -10,7 +10,7 @@ class List extends Component {
 				{/* Conditional render is used to present the loading state */}
 				{isLoading && <div>Loading...</div>}
 				{list.map(element => (
-					<div className="list-element">
+					<div className="list-element" key={element.id}>
 						<div className="list-element__title">{element.title}</div>
 						<div className="list-element__content">{element.body}</div>
 					</div>
