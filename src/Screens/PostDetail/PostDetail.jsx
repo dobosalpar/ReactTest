@@ -16,9 +16,6 @@ class PostDetail extends Component {
       return;
     }
     const { list, downloadElementById } = this.props;
-
-    console.log(list);
-    
     const currentPost = list.find(({id}) => id === parseInt(postId));
     if (currentPost) {
       this.setState({

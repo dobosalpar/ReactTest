@@ -18,7 +18,7 @@ class App extends Component {
       list: [],
     };
     this.downloadList = this.downloadList.bind(this);
-    //this.downloadElementById = this.downloadElementById.bind(this);
+    this.downloadElementById = this.downloadElementById.bind(this);
   }
 
   downloadList() {
@@ -35,7 +35,7 @@ class App extends Component {
 			});
   }
   
-  /*downloadElementById(id) {
+  downloadElementById(id) {
     this.setState({
         isLoading: true,
     })
@@ -45,10 +45,10 @@ class App extends Component {
         this.setState({
           
           isLoading: false,
-          list: json,
+          list: [this.state.list, json],
         })
-      })
-  }*/
+      });
+  }
   
   render() {
     return (
@@ -56,7 +56,7 @@ class App extends Component {
         <Navigation />
         <Route exact path="/" render={() => <RandomList isLoading={this.state.isLoading} list={this.state.list} downloadList={this.downloadList} />} />
         <Route path="/age-guesser" component={AgeGuesser}/>
-        <Route exact path="/post/:id" render={() => <PostDetail isLoading={this.state.isLoading} list={this.state.list} downloadElementById={this.downloadList} />} />
+        <Route exact path="/post/:id" render={() => <PostDetail isLoading={this.state.isLoading} list={this.state.list} downloadElementById={this.downloadElementById} />} />
       </BrowserRouter>
     );
   }
