@@ -7,7 +7,6 @@ class PostDetail extends Component {
     this.state = {
       post: {},
     };
-    this.setCurrentPost = this.setCurrentPost.bind(this);
   };
 
   setCurrentPost(){

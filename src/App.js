@@ -12,7 +12,6 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
-    // This is called moving the state up. The List component's state was moved here, since both the button and List has to know about it.
     this.state = {
       isLoading: false,
       list: [],
@@ -40,12 +39,12 @@ class App extends Component {
         isLoading: true,
     })
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then(response => response.json())
+      .then(response => response.json)
       .then(json => {
         this.setState({
           
           isLoading: false,
-          list: [this.state.list, json],
+          list: [...this.state.list, json],
         })
       });
   }
