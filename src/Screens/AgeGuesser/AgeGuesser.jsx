@@ -1,52 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
 
-class AgeGuesser extends Component {
-  constructor() {
-    super();
-    // useState
-    this.state = {
-      name: '',
-      age: null,
-      isLoading: false,
-    };
-    this.guessAge = this.guessAge.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
-  }
+const AgeGuesser = () => {
+  
+    const [name, setName] = useState("");
+    const [age, setAge] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
-  // useCallback
-  handleNameChange(text) {
-    this.setState({
-      name: text,
-    })
-  }
 
-  // useCallback
-  guessAge() {
-    const name = this.state.name;
-    this.setState({
-      isLoading: true,
-    });
+  const handleNameChange = useCallback((text) => {
+    setName(text)
+  },[]);
+
+  const guessAge = useCallback(() => {
+    setLoading(true)
     fetch(`https://api.agify.io?name=${name}`)
       .then(response => response.json())
       .then(json => {
-        this.setState({
-          age: json.age,
-          isLoading: false,
+        setAge(json.age)
+        setLoading(false)
         });
-      });
-  }
+  },[name] );
 
-  render() {
-    return (
-      <>
-        <h1>Age Guesser</h1>
-        <input type="text" value={this.state.name} onChange={e => this.handleNameChange(e.target.value)} />
-        <button onClick={this.guessAge} disabled={this.state.isLoading || !this.state.name}>Guess Age</button>
-        <div>{this.state.age}</div>
-      </>
-    );
-  }
-}
+return (
+  <>
+    <h1>Age Guesser</h1>
+    <input type="text" value={name} onChange={e => handleNameChange(e.target.value)} />
+    <button onClick={guessAge} disabled={isLoading || !name}>Guess Age</button>
+    <div>{age}</div>
+   </>
+  );
+};
 
 export default AgeGuesser;
 

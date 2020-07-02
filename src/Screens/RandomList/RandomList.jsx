@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import List from '../../Components/List/List';
 
-class RandomList extends Component {
-  render() {
-    const { isLoading, list, downloadList } = this.props;
+const RandomList = ({isLoading, list, downloadList}) => {
     return (
       <>
 	  	  <h1>Random List</h1>
@@ -13,7 +11,6 @@ class RandomList extends Component {
         <List isLoading={isLoading} list={list} />
       </>
     );
-  }
-}
+  };
 
 export default RandomList;
