@@ -39,13 +39,13 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* Add Context provider here */}
+      <TodoContext.Provider value={ {todoList, setTodoList} }>
         <Navigation />
         <Route exact path="/" render={() => <RandomList isLoading={isLoading} list={list} downloadList={downloadList} />} />
         <Route path="/age-guesser" component={AgeGuesser} />
         <Route path="/post/:id" render={() => <PostDetail isLoading={isLoading} list={list} downloadListById={downloadListById} />} />
         <Route path="/context" component={Context} />
-
+      </TodoContext.Provider>
     </BrowserRouter>
   );
 }
