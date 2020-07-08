@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { TodoContext, CalculatorContext } from '../../App';
+import { TodoContext, CalculatorContext, AgeGuesserContext } from '../../App';
 import './Navigation.css';
 
 const Navigation = () => {
 	const { todoList } = useContext(TodoContext);
 	const { state } = useContext(CalculatorContext);
+	const { ageGuesserState } = useContext(AgeGuesserContext)
 
 	return (
 		<div className="navigation">
@@ -17,6 +18,9 @@ const Navigation = () => {
 			</div>
 			<div className="navigation__info">
 				{`Your calculation result is ${state.value}`}
+			</div>
+			<div className="navigation__info">
+				{`${ageGuesserState.name} ${ageGuesserState.age} years old`}
 			</div>
 			<div className="navigation__menu">
 				<Link to="/" className="navigation__menu--element">

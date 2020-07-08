@@ -1,30 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
+import { AgeGuesserContext } from '../../App';
+import { SET } from '../../Redux/ActionTypes';
 
 const AgeGuesser = () => {
   const [name, setName] = useState('');
-  const [age, setAge] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleNameChange = useCallback((text) => {
-    setName(text)
-  }, []);
-
-  const guessAge = useCallback(() => {
-    setIsLoading(true);
-    fetch(`https://api.agify.io?name=${name}`)
-      .then(response => response.json())
-      .then(json => {
-        setIsLoading(false);
-        setAge(json.age);
-      });
-  }, [name]);
+  const { ageGuesserState, ageGuess } = useContext(AgeGuesserContext)
 
   return (
     <>
       <h1>Age Guesser</h1>
-      <input type="text" value={name} onChange={e => handleNameChange(e.target.value)} />
-      <button onClick={guessAge} disabled={isLoading || !name}>Guess Age</button>
-      <div>{age}</div>
+      <input type="text" value={name} onChange={e => setName(e.target.value)} />
+      <button onClick={() => {
+        ageGuess({
+          type: SET,
+          payload: name,
+        })
+      }}>Guess Age</button>
+      <div>{console.log(ageGuesserState.age)}</div>
     </>
   );
 }

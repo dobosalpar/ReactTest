@@ -7,16 +7,19 @@ import PostDetail from './Screens/PostDetail/PostDetail';
 import Context from './Screens/Context/Context';
 import Calculator from './Screens/Calculator/Calculator';
 import { initialState, reducer } from './Redux/Reducer';
+import { guessedAgeForName, ageGuesserReducer } from "./Redux/AgeGuesserReducer"
 import './App.css';
 
 export const TodoContext = createContext();
 export const CalculatorContext = createContext();
+export const AgeGuesserContext = createContext();
 
 const App = () => {
   const [isLoading, setIsloading] = useState(false);
   const [list, setList] = useState([]);
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [ageGuesserState, ageGuess] = useReducer(ageGuesserReducer, guessedAgeForName)
 
   // useCallback
   const downloadList = useCallback(() => {
@@ -46,12 +49,14 @@ const App = () => {
     <BrowserRouter>
       <TodoContext.Provider value={{ todoList, setTodoList }}>
       <CalculatorContext.Provider value={{ state, dispatch }}>
+      <AgeGuesserContext.Provider value={{ageGuesserState, ageGuess}}>
         <Navigation />
         <Route exact path="/" render={() => <RandomList isLoading={isLoading} list={list} downloadList={downloadList} />} />
         <Route path="/age-guesser" component={AgeGuesser} />
         <Route path="/post/:id" render={() => <PostDetail isLoading={isLoading} list={list} downloadListById={downloadListById} />} />
         <Route path="/context" component={Context} />
         <Route path="/calculator" component={Calculator} />
+      </AgeGuesserContext.Provider>
       </CalculatorContext.Provider>
       </TodoContext.Provider>
     </BrowserRouter>
