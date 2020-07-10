@@ -7,7 +7,7 @@ import PostDetail from './Screens/PostDetail/PostDetail';
 import Context from './Screens/Context/Context';
 import Calculator from './Screens/Calculator/Calculator';
 import { initialState, reducer } from './Redux/Reducer';
-import { guessedAgeForName, ageGuesserReducer } from "./Redux/AgeGuesserReducer"
+import { ageGuesserInitialState, ageGuesserReducer } from "./Redux/AgeGuesserReducer"
 import './App.css';
 
 export const TodoContext = createContext();
@@ -19,9 +19,8 @@ const App = () => {
   const [list, setList] = useState([]);
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [ageGuesserState, ageGuess] = useReducer(ageGuesserReducer, guessedAgeForName)
+  const [stateAgeGuesser, dispatchAgeGusser] = useReducer(ageGuesserReducer, ageGuesserInitialState)
 
-  // useCallback
   const downloadList = useCallback(() => {
     setIsloading(true);
 		fetch('https://jsonplaceholder.typicode.com/posts')
@@ -32,7 +31,6 @@ const App = () => {
 		});
   }, []);
 
-  // useCallback
   const downloadListById = useCallback((id) => {
     setIsloading(true);
 		fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -49,7 +47,7 @@ const App = () => {
     <BrowserRouter>
       <TodoContext.Provider value={{ todoList, setTodoList }}>
       <CalculatorContext.Provider value={{ state, dispatch }}>
-      <AgeGuesserContext.Provider value={{ageGuesserState, ageGuess}}>
+      <AgeGuesserContext.Provider value={{ stateAgeGuesser, dispatchAgeGusser }}>
         <Navigation />
         <Route exact path="/" render={() => <RandomList isLoading={isLoading} list={list} downloadList={downloadList} />} />
         <Route path="/age-guesser" component={AgeGuesser} />

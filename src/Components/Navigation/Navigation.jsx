@@ -6,7 +6,7 @@ import './Navigation.css';
 const Navigation = () => {
 	const { todoList } = useContext(TodoContext);
 	const { state } = useContext(CalculatorContext);
-	const { ageGuesserState } = useContext(AgeGuesserContext)
+	const { stateAgeGuesser } = useContext(AgeGuesserContext)
 
 	return (
 		<div className="navigation">
@@ -20,7 +20,7 @@ const Navigation = () => {
 				{`Your calculation result is ${state.value}`}
 			</div>
 			<div className="navigation__info">
-				{`${ageGuesserState.name} ${ageGuesserState.age} years old`}
+				{`${stateAgeGuesser.name} ${stateAgeGuesser.age} years old`}
 			</div>
 			<div className="navigation__menu">
 				<Link to="/" className="navigation__menu--element">
