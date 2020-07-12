@@ -1,0 +1,9 @@
+diff a/src/App.js b/src/App.js	(rejected hunks)
+@@ -6,7 +6,6 @@
+ import PostDetail from './Screens/PostDetail/PostDetail';
+ import './App.css';
+ 
+-class App extends Component {
+ const App = () => {
+   
+   const [isLoading, setIsLoading] = useState(false);
