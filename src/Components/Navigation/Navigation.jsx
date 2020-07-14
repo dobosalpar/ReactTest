@@ -6,7 +6,7 @@ import './Navigation.css';
 const Navigation = () => {
 	const { todoList } = useContext(TodoContext);
 	const { state } = useContext(CalculatorContext);
-	const {stateAgeGuesser} = useContext(AgeGuesserContext);
+	const { stateAgeGuesser } = useContext(AgeGuesserContext);
 	return (
 		<div className="navigation">
 			<div className="navigation__title">

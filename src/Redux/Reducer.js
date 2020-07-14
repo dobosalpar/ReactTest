@@ -1,7 +1,7 @@
 import { ADD, SUBTRACT, CHANGE, RESET } from './ActionTypes';
 
 export const initialState = {
-  value:0,
+  value: 0,
 };
 
 export const reducer = (state, action) => {
