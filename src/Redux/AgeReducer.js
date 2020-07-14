@@ -18,7 +18,7 @@ export  const ageReducer = (state, action) => {
     case ISLOADING:
       return {
         ...state,
-        isLoading: payload.loading,
+        isLoading: true,
       }    
     case NAME: 
       return {

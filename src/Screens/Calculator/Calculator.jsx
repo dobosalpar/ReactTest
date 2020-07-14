@@ -8,7 +8,7 @@ const Calculator = () => {
   const changeState = (e) => {
     dispatch({ 
       type: CHANGE,
-      payload: parseInt(e.target.value),
+      payload: parseInt(e.target.value) || 0,
     });
   };
     
@@ -20,7 +20,7 @@ const Calculator = () => {
       {`Result: ${state.value}`}
       </div>
       Set number :
-      <input type="text" value={state.value} onChange={changeState} />
+      <input type="number" value={state.value} onChange={changeState} />
       <button onClick={() => dispatch({ type: RESET })}>Reset</button>
     </div>
   );

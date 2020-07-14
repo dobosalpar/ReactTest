@@ -13,7 +13,7 @@ const AgeGuesser = () => {
   };
       
   const guessAge = useCallback(() => {
-    dispatchAgeGuesser({ type: ISLOADING, payload:true });
+    dispatchAgeGuesser({ type: ISLOADING });
     fetch(`https://api.agify.io?name=${stateAgeGuesser.name}`)
     .then(response => response.json())
     .then(json => 
@@ -25,7 +25,7 @@ const AgeGuesser = () => {
     <>
     <h1>Age Guesser</h1>
     <input type="text" value={stateAgeGuesser.name} onChange={handleNameChange} />
-    <button onClick={guessAge}>Guess Age</button>
+    <button onClick={guessAge} disabled={stateAgeGuesser.isLoading || !stateAgeGuesser.name} >Guess Age</button>
     <div>{stateAgeGuesser.age}</div>
     </>
   );
