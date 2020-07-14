@@ -1,26 +1,34 @@
-import React, { useState, useCallback, useContext } from "react"
+import React, { useCallback, useContext } from "react"
 import { AgeGuesserContext } from "../../App";
-import { SET } from '../../Redux/ActionTypes';
+import { SET, LOADING, NAME } from '../../Redux/ActionTypes';
+import { ageGuesserReducer } from "../../Redux/AgeGuesserReducer";
 const AgeGuesser = () => {
 
   const { stateAgeGuesser, dispatchAgeGusser } = useContext(AgeGuesserContext);
-  const [name, setName] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+ 
+  const handleNameChange = (e) => {
+    dispatchAgeGusser({
+      type: NAME,
+      payload: e.target.value,
+    });
+  };
 
   const guessAge = useCallback(() => {
-    setIsLoading(true)
-    fetch(`https://api.agify.io?name=${name}`)
+   
+    dispatchAgeGusser({type: LOADING, payload: true});
+    fetch(`https://api.agify.io?name=${stateAgeGuesser.name}`)
       .then(response => response.json())
-      .then(json => dispatchAgeGusser({type: SET, payload: json}));
-      setIsLoading(false)
-    }, [dispatchAgeGusser, name]);
-
+      .then(json => dispatchAgeGusser(
+        {type: SET, 
+        payload: json}
+      ));
+      dispatchAgeGusser({type: LOADING, payload: false});
+    }, [dispatchAgeGusser, stateAgeGuesser.name]);
   return (
-
     <>
       <h1>AgeGuesser</h1>
-      <input type="text" value={name} onChange={e => setName(e.target.value)} />
-      <button onClick={guessAge} disabled={isLoading || !name }>Guess Name</button> 
+      <input type="text" value={stateAgeGuesser.name} onChange={handleNameChange} />
+      <button onClick={guessAge} disabled={stateAgeGuesser.isLoading || !ageGuesserReducer.name}>Guess Name</button> 
       <div>{stateAgeGuesser.age}</div>
     </>
   );

@@ -8,13 +8,40 @@ const Calculator = () => {
   const [savedValue, setSaveValue] = useState(0)
   return (
     <div>
-      <input type="number" value={baseValue} onChange={e => setBaseValue(parseInt(e.target.value))} />
-      <button onClick={() => {setSaveValue(parseInt(baseValue)) 
-      setBaseValue(null)
-      dispatch({type: SET, payload: baseValue,})}}>Base Number</button>
-      <button onClick={() =>{dispatch({type: RESET, payload: savedValue,})}}>Reset Base Number</button>
-      <button onClick={() => {dispatch({type: ADD, payload: 10,})}}>Add 10</button>
-      <button onClick={() => {dispatch({type: SUBTRACT,payload: 10,})}}>Substract 10</button>
+      <input type="number" value={baseValue} onChange={e => setBaseValue(parseInt(e.target.value) || 0 )} />
+      <button onClick={() => {
+        setSaveValue(parseInt(baseValue)) 
+        dispatch({
+          type: SET, 
+          payload: baseValue,
+          });
+        }}>
+        Base Number
+      </button>
+      <button onClick={() =>{
+        dispatch({
+          type: RESET, 
+          payload: savedValue,
+          });
+        }}>
+        Reset Base Number
+      </button>
+      <button onClick={() => {
+        dispatch(
+          {type: ADD,
+          payload: 10,
+          });
+        }}>
+        Add 10
+      </button>
+      <button onClick={() => {
+        dispatch(
+          {type: SUBTRACT,
+          payload: 10,
+          });
+        }}>
+        Substract 10
+      </button>
       <div>
         {`Result: ${state.value}`}
       </div>
