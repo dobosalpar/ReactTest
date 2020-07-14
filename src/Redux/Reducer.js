@@ -1,4 +1,4 @@
-import { ADD, SUBTRACT } from './ActionTypes';
+import { ADD, SUBTRACT, CHANGE, RESET } from './ActionTypes';
 
 export const initialState = {
   value: 0,
@@ -14,6 +14,14 @@ export const reducer = (state, action) => {
     case SUBTRACT:
       return {
         value: state.value - payload,
+      };
+    case CHANGE:
+      return {
+        value: payload,
+      };
+    case RESET:
+      return {
+        value: 0,
       };
     default:
       return state;
