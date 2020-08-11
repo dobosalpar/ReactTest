@@ -1,12 +1,27 @@
 import React, { useContext } from 'react';
 import { CalculatorContext } from '../../App';
-import { ADD, SUBTRACT } from '../../Redux/ActionTypes';
+import { ADD, SUBTRACT, SET } from '../../Redux/ActionTypes';
+import { useState } from 'react';
 
 const Calculator = () => {
   const { state, dispatch } = useContext(CalculatorContext);
+  const [initialValue, setInitialValue] = useState(0)
 
   return (
     <div>
+      <div>
+        <input type="number" value={initialValue} onChange={(e) => {
+          setInitialValue(parseInt(e.target.value))
+        }} />
+        <button onClick={() => {
+        dispatch({
+          type: SET,
+          payload: initialValue,
+        })
+      }}>
+        Set initial value
+      </button>
+      </div>
       <button onClick={() => {
         dispatch({
           type: ADD,
@@ -26,6 +41,14 @@ const Calculator = () => {
       <div>
         {`Result: ${state.value}`}
       </div>
+      <button onClick={() => {
+        dispatch({
+          type: SET,
+          payload: initialValue,
+        })
+      }}>
+        Reset
+      </button>
     </div>
   )
 }
