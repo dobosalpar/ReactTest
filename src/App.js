@@ -10,8 +10,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Navigation />
-        <RandomList />
-        <AgeGuesser />
+        <Route path="/" exact>
+          <RandomList />
+        </Route>
+        <Route path="/age-guesser">
+          <AgeGuesser />
+        </Route>
       </BrowserRouter>
     );
   }
