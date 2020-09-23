@@ -7,7 +7,7 @@ import PostDetail from './Screens/PostDetail/PostDetail';
 import Context from './Screens/Context/Context';
 import './App.css';
 
-export const TodoContext = createContext();
+export const ToDoContext = createContext();
 
 const App = () => {
   const [isLoading, setIsloading] = useState(false);
@@ -35,17 +35,17 @@ const App = () => {
 		});
   }, [list]);
 
-  const [todoList, setTodoList] = useState([]);
+  const [toDoList, setToDoList] = useState([]);
 
   return (
     <BrowserRouter>
-      {/* Add Context provider here */}
+      <ToDoContext.Provider value={{ toDoList, setToDoList }}>
         <Navigation />
         <Route exact path="/" render={() => <RandomList isLoading={isLoading} list={list} downloadList={downloadList} />} />
         <Route path="/age-guesser" component={AgeGuesser} />
         <Route path="/post/:id" render={() => <PostDetail isLoading={isLoading} list={list} downloadListById={downloadListById} />} />
         <Route path="/context" component={Context} />
-
+      </ToDoContext.Provider>
     </BrowserRouter>
   );
 }

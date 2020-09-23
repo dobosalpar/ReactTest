@@ -1,24 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 
-import TodoElement from '../../Components/TodoElement/TodoElement';
-// Import the context here
+import ToDoElement from '../../Components/TodoElement/TodoElement';
+import { ToDoContext } from '../../App';
 
 const Context = () => {
-  const [todo, setTodo] = useState('');
+  const [toDo, setToDo] = useState('');
   
-  // Get the needed values from the context here
-
-  const handeAddTodo = useCallback(() => {
-    setTodo('');
-    // You should update the todo list here
-  }, []);
+  const { toDoList, setToDoList } = useContext(ToDoContext);
+  const handleAddToDo = useCallback(() => {
+    setToDoList([...toDoList, toDo]);
+    setToDo(''); 
+  }, [setToDoList, toDo, toDoList]);
 
   return (
     <div>
-      {/* Replace the empty array with the todo list */}
-      {[].map((item) => <TodoElement todo={item} />)}
-      <input type="text" value={todo} onChange={e => setTodo(e.target.value)} />
-      <button onClick={handeAddTodo}>Add TODO</button>
+      {toDoList.map((item) => <ToDoElement toDo={item} />)}
+      <input type="text" value={toDo} onChange={e => setToDo(e.target.value)} />
+      <button onClick={handleAddToDo}>Add TODO</button>
     </div>
   )
 }

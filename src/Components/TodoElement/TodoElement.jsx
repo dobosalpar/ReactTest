@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TodoElement = ({ todo }) => (
+const ToDoElement = ({ toDo }) => (
   <div>
-    {todo}
+    {toDo}
   </div>
 );
 
-export default TodoElement;
+export default ToDoElement;
