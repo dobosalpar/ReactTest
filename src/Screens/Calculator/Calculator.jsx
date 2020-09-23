@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CalculatorContext } from '../../App';
-import { ADD, SUBTRACT } from '../../Redux/ActionTypes';
+import { ADD, RESET, SUBTRACT, SET } from '../../Redux/ActionTypes';
 
 const Calculator = () => {
   const { state, dispatch } = useContext(CalculatorContext);
@@ -23,6 +23,28 @@ const Calculator = () => {
       }}>
         Substract 10
       </button>
+      <button onClick={() => {
+        dispatch({
+          type: RESET,
+          payload: 0,
+        })
+      }}>
+        Reset
+      </button>
+      <div>
+        <input type="text" value={state.value} onChange={e => {
+
+          // Only allow numbers
+          const re = /^[0-9\b]+$/;
+          if (e.target.value === '' || re.test(e.target.value)) {
+            dispatch({
+              type: SET,
+              payload: e.target.value,
+            })        
+          }
+        }}/>
+      </div>
+
       <div>
         {`Result: ${state.value}`}
       </div>

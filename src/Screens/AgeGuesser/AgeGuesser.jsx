@@ -22,7 +22,7 @@ const AgeGuesser = () => {
   return (
     <>
       <h1>Age Guesser</h1>
-      <input type="text" value={name} onChange={e => handleNameChange(e.target.value)} />
+      <input type="number" value={name} onChange={e => handleNameChange(e.target.value)} />
       <button onClick={guessAge} disabled={isLoading || !name}>Guess Age</button>
       <div>{age}</div>
     </>
