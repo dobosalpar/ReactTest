@@ -6,17 +6,57 @@ import AgeGuesser from './Screens/AgeGuesser/AgeGuesser';
 import PostDetail from './Screens/PostDetail/PostDetail';
 import './App.css';
 
-// PATH to download post by ID:
-// https://jsonplaceholder.typicode.com/posts/1
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      list: [],
+      isLoading: false,
+    };
+    this.downloadList = this.downloadList.bind(this);
+    this.downloadElmentById = this.downloadElementById.bind(this);
+  }
+
+  downloadElementById(id) {
+
+    // PATH to download post by ID:
+    // https://jsonplaceholder.typicode.com/posts/1
+    this.setState({
+			isLoading: true,
+		})
+		fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          isLoading: false,
+          list: [...this.state.list, json],
+        })
+		});
+  }
+
+  downloadList() {
+    this.setState({
+			isLoading: true,
+		})
+		fetch('https://jsonplaceholder.typicode.com/posts')
+  		.then(response => response.json())
+			.then(json => {
+        console.log('Json', json)
+				this.setState({
+					isLoading: false,
+					list: json,
+				})
+			});
+  }
+
   render() {
     return (
       <BrowserRouter>
         <Navigation />
-        <Route exact path="/" component={RandomList} />
+        <Route exact path="/" render={() => <RandomList isLoading={this.state.isLoading} list={this.state.list} downloadList={this.downloadList} />} />
         <Route path="/age-guesser" component={AgeGuesser} />
-
+        <Route path="/post/:id" render={() => <PostDetail isLoading={this.state.isLoading} list={this.state.list} downloadElementById={this.downloadElmentById} />} />
       </BrowserRouter>
     );
   }

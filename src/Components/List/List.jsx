@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './List.css';
+import { Link } from 'react-router-dom';
 
 class List extends Component {
 	render() {
@@ -10,10 +11,10 @@ class List extends Component {
 				{/* Conditional render is used to present the loading state */}
 				{isLoading && <div>Loading...</div>}
 				{list.map(element => (
-					<div key={element.id} className="list-element">
+					<Link key={element.id} className="list-element" to={`/post/${element.id}`}>
 						<div className="list-element__title">{element.title}</div>
 						<div className="list-element__content">{element.body}</div>
-					</div>
+					</Link>
 				))}
 			</div>
 		);
