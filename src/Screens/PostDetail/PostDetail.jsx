@@ -1,55 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
-class PostDetail extends Component {
-  constructor() {
-    super();
-    // useState
-    this.state = {
-      post: {},
-    };
-  }
-
-  // useEffect
-  setCurrentPost() {
-    const postId = this.props.match.params.id;
-    if (this.state.post.id === parseInt(postId) || this.props.isLoading) {
-      return;
+const PostDetail = ({
+  list,
+  downloadListById,
+  isLoading,
+  match: {
+    params: {
+      id: postId
     }
-    const { list, downloadListById } = this.props;
-    const currentPost = list.find(({ id }) => id === parseInt(postId));
-    if (currentPost) {
-      this.setState({
-        post: currentPost,
-      });
-      return;
-    }
-    downloadListById(postId);
   }
+}) => {
 
-  // useEffect
-  componentDidMount() {
-    this.setCurrentPost();
-  }
+    const [post, setPost] = useState({});
 
-  // useEffect
-  componentDidUpdate() {
-    this.setCurrentPost();
-  }
+    useEffect(() => {
+      const currentPost = list.find(({ id }) => id === parseInt(postId));
+      if (currentPost) {
+        setPost(currentPost);
+        return;
+      }
+      downloadListById(postId);
+    }, [downloadListById, list, postId]);
 
-  render() {
     return (
       <div>
-        {this.props.isLoading && <p>Loading post....</p>}
+        {isLoading && <p>Loading post....</p>}
         <h1>
-          {this.state.post.title}
+          {post.title}
         </h1>
         <div>
-          {this.state.post.body}
+          {post.body}
         </div>
       </div>
     );
-  }
-};
+  };
+  
+
 
 export default withRouter(PostDetail);
